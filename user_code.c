@@ -303,7 +303,9 @@ int32_t tksErr2Ctrl(void) {
 //option1: using pwm
 uint16_t Ctrl2DC16(int32_t ctrl) {
 	//update pwm generator only if ctrl <> 0
-	if (ctrl) pwm2SetDC(constrain(pwm2GetDC() + ctrl, 1, 0xffff));			//output timing errors on the pwm2 generator
+	if (ctrl) pwm2SetDC(constrain(pwm2GetDC() + ctrl, 1, 0xffff));					//output timing errors on the 16-bit pwm2 generator
+	//if (ctrl) pwm2SetDC(constrain(pwm2GetDC() + ctrl, 1, 0xffff) & 0xffc0);			//output timing errors on the 10-bit pwm2 generator
+	//if (ctrl) pwm2SetDC(constrain(pwm2GetDC() + ctrl, 1, 0xffff) & 0xff00);			//output timing errors on the 8-bit pwm2 generator
 	return pwm2GetDC();								//return pwm duty cycle
 }
 
